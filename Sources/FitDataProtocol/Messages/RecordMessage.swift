@@ -816,9 +816,11 @@ open class RecordMessage: FitMessage {
             case .deviceIndex:
                 if let _ = deviceIndex { fileDefs.append(key.fieldDefinition()) }
             case .enhancedSpeed:
-                if let _ = speed { fileDefs.append(key.fieldDefinition()) }
+                // if let _ = speed { fileDefs.append(key.fieldDefinition()) }
+                break
             case .enhancedAltitude:
-                if let _ = altitude { fileDefs.append(key.fieldDefinition()) }
+                // if let _ = altitude { fileDefs.append(key.fieldDefinition()) }
+                break
             }
         }
 
@@ -1125,20 +1127,22 @@ open class RecordMessage: FitMessage {
                 }
 
             case .enhancedSpeed:
-                if var enhancedSpeed = speed {
-                    enhancedSpeed = enhancedSpeed.converted(to: UnitSpeed.metersPerSecond)
-                    if let error = msgData.shouldAppend(key.encodeKeyed(value: enhancedSpeed.value)) {
-                        return.failure(error)
-                    }
-                }
+                // if var enhancedSpeed = speed {
+                //     enhancedSpeed = enhancedSpeed.converted(to: UnitSpeed.metersPerSecond)
+                //     if let error = msgData.shouldAppend(key.encodeKeyed(value: enhancedSpeed.value)) {
+                //         return.failure(error)
+                //     }
+                // }
+                break
 
             case .enhancedAltitude:
-                if var altitude = altitude {
-                    altitude = altitude.converted(to: UnitLength.meters)
-                    if let error = msgData.shouldAppend(key.encodeKeyed(value: altitude.value)) {
-                        return.failure(error)
-                    }
-                }
+                // if var altitude = altitude {
+                //     altitude = altitude.converted(to: UnitLength.meters)
+                //     if let error = msgData.shouldAppend(key.encodeKeyed(value: altitude.value)) {
+                //         return.failure(error)
+                //     }
+                // }
+                break
 
             }
         }
