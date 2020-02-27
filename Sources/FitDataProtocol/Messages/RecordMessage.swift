@@ -729,8 +729,7 @@ open class RecordMessage: FitMessage {
             case .positionLongitude:
                 if let _ = position.encodeLongitude() { fileDefs.append(key.fieldDefinition()) }
             case .altitude:
-                /// use enhancedAltitude
-                break
+                if let _ = altitude { fileDefs.append(key.fieldDefinition()) }
             case .heartRate:
                 if let _ = heartRate { fileDefs.append(key.fieldDefinition()) }
             case .cadence:
@@ -738,8 +737,7 @@ open class RecordMessage: FitMessage {
             case .distance:
                 if let _ = distance { fileDefs.append(key.fieldDefinition()) }
             case .speed:
-                /// use enhanced Speed
-                break
+                if let _ = speed { fileDefs.append(key.fieldDefinition()) }
             case .power:
                 if let _ = power { fileDefs.append(key.fieldDefinition()) }
             case .compressedSpeedDistance:
@@ -871,8 +869,12 @@ open class RecordMessage: FitMessage {
                 }
 
             case .altitude:
-                /// use enhanced altitude
-                break
+                if var altitude = altitude {
+                    altitude = altitude.converted(to: UnitLength.meters)
+                    if let error = msgData.shouldAppend(key.encodeKeyed(value: altitude.value)) {
+                        return.failure(error)
+                    }
+                }
 
             case .heartRate:
                 if let heartRate = heartRate {
@@ -897,8 +899,12 @@ open class RecordMessage: FitMessage {
                 }
 
             case .speed:
-                //use enhanced speed
-                break
+                if var enhancedSpeed = speed {
+                    enhancedSpeed = enhancedSpeed.converted(to: UnitSpeed.metersPerSecond)
+                    if let error = msgData.shouldAppend(key.encodeKeyed(value: enhancedSpeed.value)) {
+                        return.failure(error)
+                    }
+                }
 
             case .power:
                 if var power = power {
