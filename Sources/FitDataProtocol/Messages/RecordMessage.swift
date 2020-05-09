@@ -60,22 +60,22 @@ open class RecordMessage: FitMessage {
     @FitFieldDimension(base: BaseTypeData(type: .uint16, resolution: Resolution(scale: 5.0, offset: 500.0)),
                        fieldNumber: 2,
                        unit: UnitLength.meters)
-    private var _altitude: Measurement<UnitLength>?
+    private(set) public var altitude: Measurement<UnitLength>?
     
     @FitFieldDimension(base: BaseTypeData(type: .uint32, resolution: Resolution(scale: 5.0, offset: 500.0)),
                        fieldNumber: 78,
                        unit: UnitLength.meters)
-    private var enhancedAltitude: Measurement<UnitLength>?
+    private(set) public var enhancedAltitude: Measurement<UnitLength>?
     
     /// Altitude
-    private(set) public var altitude: Measurement<UnitLength>? {
-        get {
-            return preferredField(preferred: self.enhancedAltitude, fallbakck: self._altitude)
-        }
-        set {
-            self.enhancedAltitude = newValue
-        }
-    }
+    // private(set) public var altitude: Measurement<UnitLength>? {
+    //     get {
+    //         return preferredField(preferred: self.enhancedAltitude, fallbakck: self._altitude)
+    //     }
+    //     set {
+    //         self.enhancedAltitude = newValue
+    //     }
+    // }
     
     /// Heart Rate
     @FitFieldUnit(base: BaseTypeData(type: .uint8, resolution: Resolution(scale: 1.0, offset: 0.0)),
@@ -98,22 +98,22 @@ open class RecordMessage: FitMessage {
     @FitFieldDimension(base: BaseTypeData(type: .uint16, resolution: Resolution(scale: 1000.0, offset: 0.0)),
                        fieldNumber: 6,
                        unit: UnitSpeed.metersPerSecond)
-    private var _speed: Measurement<UnitSpeed>?
+    private(set) public var speed: Measurement<UnitSpeed>?
     
     @FitFieldDimension(base: BaseTypeData(type: .uint32, resolution: Resolution(scale: 1000.0, offset: 0.0)),
                        fieldNumber: 73,
                        unit: UnitSpeed.metersPerSecond)
-    private var enhancedSpeed: Measurement<UnitSpeed>?
+    private(set) public var enhancedSpeed: Measurement<UnitSpeed>?
     
     /// Speed
-    private(set) public var speed: Measurement<UnitSpeed>? {
-        get {
-            return preferredField(preferred: self.enhancedSpeed, fallbakck: self._speed)
-        }
-        set {
-            self.enhancedSpeed = newValue
-        }
-    }
+    // private(set) public var speed: Measurement<UnitSpeed>? {
+    //     get {
+    //         return preferredField(preferred: self.enhancedSpeed, fallbakck: self._speed)
+    //     }
+    //     set {
+    //         self.enhancedSpeed = newValue
+    //     }
+    // }
     
     /// Power
     @FitFieldDimension(base: BaseTypeData(type: .uint16, resolution: Resolution(scale: 1.0, offset: 0.0)),
@@ -420,12 +420,12 @@ open class RecordMessage: FitMessage {
         
         self.$latitude.owner = self
         self.$longitude.owner = self
-        self.$_altitude.owner = self
+        self.$altitude.owner = self
         self.$enhancedAltitude.owner = self
         self.$heartRate.owner = self
         self.$cadence.owner = self
         self.$distance.owner = self
-        self.$_speed.owner = self
+        self.$speed.owner = self
         self.$enhancedSpeed.owner = self
         self.$power.owner = self
         self.$compressedSpeedDistance.owner = self
