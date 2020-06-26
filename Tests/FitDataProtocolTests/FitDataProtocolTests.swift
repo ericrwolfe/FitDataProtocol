@@ -157,7 +157,7 @@ extension FitDataProtocolTests {
                                  product: 22,
                                  fileNumber: nil,
                                  fileType: FileType.activity,
-                                 productName: "sdf--22")
+                                 productName: "sdf’s-例-22")
         
         let encoder = FitFileEncoder(dataValidityStrategy: .none)
         
@@ -172,7 +172,6 @@ extension FitDataProtocolTests {
             XCTFail(error.localizedDescription)
             return
         }
-
         
         do {
             var decoder = FitFileDecoder(crcCheckingStrategy: .throws)
@@ -186,7 +185,7 @@ extension FitDataProtocolTests {
                     if fileId.product != 22 {
                         XCTFail()
                     }
-                    if fileId.productName != "sdf--22" {
+                    if fileId.productName != "sdf’s-例-22" {
                         XCTFail()
                     }
                 }

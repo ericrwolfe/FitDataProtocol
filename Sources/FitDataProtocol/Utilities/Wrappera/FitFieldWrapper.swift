@@ -86,10 +86,10 @@ final public class FitField<T>: FieldWrapper where T: FitFieldCodeable {
                     
                     let def: FieldDefinition
                     
-                    if let value = value as? String {
-                        def = FieldDefinition(fieldDefinitionNumber: self.fieldNumber, size: UInt8(value.count), type: self.base)
-                    } else if let value = value as? Data {
-                        def = FieldDefinition(fieldDefinitionNumber: self.fieldNumber, size: UInt8(value.count), type: self.base)
+                    if value is String {
+                        def = FieldDefinition(fieldDefinitionNumber: self.fieldNumber, size: UInt8(data.count), type: self.base)
+                    } else if value is Data {
+                        def = FieldDefinition(fieldDefinitionNumber: self.fieldNumber, size: UInt8(data.count), type: self.base)
                     } else {
                         def = FieldDefinition(fieldDefinitionNumber: self.fieldNumber, type: self.base)
                     }
